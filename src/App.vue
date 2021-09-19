@@ -1,15 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="content">
+    <ItemsList :items="items" @loadMore="loadMore" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ItemsList from './components/ItemsList.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ItemsList
+  },
+  data() {
+    return {
+      page: 0,
+      items: []
+    }
+  },
+  beforeMount() {
+    this.loadMore()
+  },
+  methods: {
+    loadMore() {
+     this.page ++;
+     console.log((this.page - 1) * 20 + 1, this.page * 20)
+     const results = this.range((this.page - 1) * 20 + 1, this.page * 20)
+     console.log(results);
+     this.items = [...this.items, ...results];
+    },
+    range(start, end) {
+      return Array(end - start + 1).fill().map((_, idx) => `Item${start + idx}`)
+    }
   }
 }
 </script>
@@ -21,6 +43,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: #7fc7bb;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+#content {
+  width: 600px;
   margin-top: 60px;
+  background: white;
+  display: flex;
+  justify-content: center;
 }
 </style>
