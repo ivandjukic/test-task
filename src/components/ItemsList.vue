@@ -4,7 +4,7 @@
     <button @click="toggleShowList">
       {{ showList? 'Hide list' : 'Show list' }} 
     </button>
-    <div id="listWrapper">
+    <div id="listWrapper" v-show="showList">
       <ul id="list">
         <li v-for="(item, index) in items" :key={index}>
           {{item}}
@@ -44,13 +44,14 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #container {
   width: 100%;
 }
 #listWrapper {
-  padding: 0 32px;
+  padding: 32px;
+  margin-top: 32px;
+  background: white;
 }
 ul {
   overflow: auto;

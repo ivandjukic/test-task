@@ -24,9 +24,7 @@ export default {
   methods: {
     loadMore() {
      this.page ++;
-     console.log((this.page - 1) * 20 + 1, this.page * 20)
      const results = this.range((this.page - 1) * 20 + 1, this.page * 20)
-     console.log(results);
      this.items = [...this.items, ...results];
     },
     range(start, end) {
@@ -51,7 +49,6 @@ export default {
 #content {
   width: 600px;
   margin-top: 60px;
-  background: white;
   display: flex;
   justify-content: center;
 }
